@@ -1,5 +1,12 @@
-# Brewsion
+# Default
 
-This is the sample application for Brewsion. Fuse beers and help find the next black and tan.
+This is a default application that includes the following gems:
+- devise
+- simple_form
+- bootstrap
+
+And the following modifications:
+- pg for production environment (for heroku)
+- removed password recovery option
 
 by Tony Ruiz

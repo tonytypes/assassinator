@@ -1,5 +1,12 @@
 Brewsion::Application.routes.draw do
+  resources :plays
+
+
+  resources :games
+
+
   devise_for :users
+  resources :users, only: [:index]
 
   root :to => 'pages#home'
   get 'about' => 'pages#about'

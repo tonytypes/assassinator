@@ -11,7 +11,49 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815121652) do
+ActiveRecord::Schema.define(:version => 20140929131018) do
+
+  create_table "game_plays", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "userone_id"
+    t.integer  "usertwo_id"
+    t.string   "useronekillcode"
+    t.integer  "useronestatus"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "game_plays", ["userone_id", "usertwo_id"], :name => "index_game_plays_on_userone_id_and_usertwo_id", :unique => true
+  add_index "game_plays", ["userone_id"], :name => "index_game_plays_on_userone_id"
+  add_index "game_plays", ["usertwo_id"], :name => "index_game_plays_on_usertwo_id"
+
+  create_table "games", :force => true do |t|
+    t.string   "gamename"
+    t.datetime "start"
+    t.datetime "end"
+    t.text     "description"
+    t.integer  "status",      :default => 0
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "user_id"
+  end
+
+  add_index "games", ["user_id"], :name => "index_games_on_user_id"
+
+  create_table "plays", :force => true do |t|
+    t.string   "useronekillcode"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "game_id"
+    t.integer  "userone_id"
+    t.integer  "useronestatus"
+    t.integer  "targetuser_id"
+  end
+
+  add_index "plays", ["game_id", "userone_id", "targetuser_id"], :name => "index_plays_on_game_id_and_userone_id_and_targetuser_id", :unique => true
+  add_index "plays", ["game_id"], :name => "index_plays_on_game_id"
+  add_index "plays", ["targetuser_id"], :name => "index_plays_on_targetuser_id"
+  add_index "plays", ["userone_id"], :name => "index_plays_on_userone_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -26,7 +68,9 @@ ActiveRecord::Schema.define(:version => 20130815121652) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.string   "name"
+    t.string   "username"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

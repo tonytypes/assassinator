@@ -1,0 +1,12 @@
+<%= simple_form_for(@play) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :game_id, collection: Game.all, label_method: :gamename, value_method: :id, label: "Select your game" %>
+    <%= f.input :useronekillcode, label: "Create a secret kill code (this is what you'll give to your assassin when you're killed)"%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

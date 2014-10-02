@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :firstname, :lastname
   # attr_accessible :title, :body
+  # Adds Games to Users
+  has_many :games, :dependent => :destroy
+  # Adds Plays to Users
+  has_many :plays, class_name: "Play", foreign_key: "userone_id", :dependent => :destroy
+
 end
