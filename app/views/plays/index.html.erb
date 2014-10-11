@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Play ID</th>
     <th>Game ID</th>
     <th>Game Name</th>
     <th>UserOne ID</th>
@@ -16,12 +17,13 @@
 
 <% @plays.each do |play| %>
   <tr>
+    <td><%= play.id %></td>
     <td><%= play.game_id %></td>
     <td><%= play.game.gamename %></td>
     <td><%= play.userone_id %></td>
     <td><%= play.user.username %></td>
     <td><%= play.targetuser_id %></td>
-    <td><%= play.targetuser_id %></td>
+    <td><%= play.targetted.try(:username) %></td>
     <td><%= play.useronekillcode %></td>
     <td><%= link_to 'Show', play %></td>
     <td><%= link_to 'Edit', edit_play_path(play) %></td>

@@ -7,4 +7,7 @@ class Game < ActiveRecord::Base
   # Adds Users to Games (after adding user_id column to Games and indexing user_id col in Games)
   belongs_to :user
   validates :user_id, presence: true
+
+
+
 end

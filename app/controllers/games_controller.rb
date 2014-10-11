@@ -15,11 +15,33 @@ class GamesController < ApplicationController
   # GET /games/1.json
   def show
     @game = Game.find(params[:id])
+    # This will let me display the plays for each game, in Show view
+    @plays = @game.plays.all
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
     end
+  end
+
+  # Here's the code to execute upon click, to actually edit the table
+  def begingame
+    @game = Game.find(params[:id])
+    # This will let me display the plays for each game, in Show view
+    @plays = @game.plays.all
+    # This is where my code for saving the shuffled targets begins
+    shuffled = @game.plays.pluck(:userone_id).shuffle
+    hash = Hash[shuffled.map.with_index.to_a]
+    @plays.each { |n| n.update_attribute(:targetuser_id, shuffled[hash[n.userone_id]-1]) }
+    # Change the status of this game to "1," which means "started"
+    @game.update_attribute(:status, 1)
+    # Upon clicking "Begin Game," redirect to game's show screen
+    # and pass a notice that the game was succeffully started.
+    respond_to do |format|
+      format.html { redirect_to @game, notice: 'Game was successfully started.'  }
+      format.json { head :no_content }
+    end
+
   end
 
   # GET /games/new
@@ -85,4 +107,7 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 end

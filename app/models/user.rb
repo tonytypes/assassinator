@@ -15,5 +15,9 @@ class User < ActiveRecord::Base
   has_many :games, :dependent => :destroy
   # Adds Plays to Users
   has_many :plays, class_name: "Play", foreign_key: "userone_id", :dependent => :destroy
+  # Adds Plays to Users for targets
+  has_many :plays, class_name: "Play", foreign_key: "targetuser_id", :dependent => :destroy
+  # Adds user's relationship to his/her targets
+  has_many :targetted_users, through: :plays, source: :targetted
 
 end

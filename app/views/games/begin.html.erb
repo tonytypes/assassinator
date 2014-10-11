@@ -1,15 +1,10 @@
-<p>
-  <b>Gamename:</b>
-  <%= @game.gamename %>
-</p>
-
+<%= # Added this, but it's not working as hoped. Probably delete. %>
 <h1>Listing plays for this game</h1>
 
 <table>
   <tr>
     <th>Game ID</th>
     <th>Game Name</th>
-    <th>Play ID</th>
     <th>UserOne ID</th>
     <th>UserOne Name</th>
     <th>TargetUser ID</th>
@@ -21,19 +16,22 @@
   <tr>
     <td><%= play.game_id %></td>
     <td><%= play.game.gamename %></td>
-    <td><%= play.id %></td>
     <td><%= play.userone_id %></td>
     <td><%= play.user.username %></td>
     <td><%= play.targetuser_id %></td>
-    <td><%= play.targetted.try(:username) %></td>
+    <td><%= play.targetuser_id %></td>
     <td><%= play.useronekillcode %></td>
+    <td><%= link_to 'Show', game %></td>
+    <% if current_user == game.user %>
+      <td><%= link_to 'Begin', begin_game(game) %></td>
+      <td><%= link_to 'Edit', edit_game_path(game) %></td>
+      <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
-<% if @game.status == 0 %>
-  <%= link_to 'Begin Game', { action: "begingame", id: @game }, method: :put %> |
-<% end %>
+<br />
 
 <% if current_user == @game.user %>
 	<%= link_to 'Edit', edit_game_path(@game) %> |

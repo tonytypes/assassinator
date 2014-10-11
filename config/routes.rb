@@ -1,9 +1,11 @@
 Brewsion::Application.routes.draw do
   resources :plays
 
-
-  resources :games
-
+  resources :games do
+    member do
+      put :begingame
+    end
+  end
 
   devise_for :users
   resources :users, only: [:index]
