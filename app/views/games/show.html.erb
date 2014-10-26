@@ -3,6 +3,11 @@
   <%= @game.gamename %>
 </p>
 
+<% if @game.status == 1 %>
+  <p>Game has begun, so gamestats will be rendered below</p>
+  <%= render 'gamestats' %>
+<% end %>
+
 <h1>Listing plays for this game</h1>
 
 <table>
@@ -15,6 +20,7 @@
     <th>TargetUser ID</th>
     <th>TargetUser Name</th>
     <th>UserOne Kill Code</th>
+    <th>UserOne Kills</th>
   </tr>
 
 <% @plays.each do |play| %>
@@ -22,11 +28,12 @@
     <td><%= play.game_id %></td>
     <td><%= play.game.gamename %></td>
     <td><%= play.id %></td>
-    <td><%= play.userone_id %></td>
-    <td><%= play.user.username %></td>
-    <td><%= play.targetuser_id %></td>
-    <td><%= play.targetted.try(:username) %></td>
+    <td><%= play.assassin.id %></td>
+    <td><%= play.assassin.username %></td>
+    <td><%= play.target.try(:id) %></td>
+    <td><%= play.target.try(:username) %></td>
     <td><%= play.useronekillcode %></td>
+    <td><%= play.kills %></td>
   </tr>
 <% end %>
 </table>

@@ -1,0 +1,44 @@
+<h1>Game Stats for <%= @game.gamename %></h1>
+
+<div>
+
+  <div id="stats_target">
+
+
+    <h2>Your Target</h2>
+    
+    <div id="target_pic">
+      <p>Picture placeholder</p>
+    </div>
+
+    <div id="target_info">
+      <p>Username: <%= @play_as_assassin.target.try(:username) %></p>
+      <p>First Name: <%= @play_as_assassin.target.try(:firstname) %></p>
+      <p>Last Name: <%= @play_as_assassin.target.try(:lastname) %></p>
+      <p>Maybe link to more information about the target? (Based on selections by the game creator?)</p>
+    </div>
+
+  </div>
+
+  <div id="stats_you">
+
+    <h2>You</h2>
+    <p>Username: <%= @play_as_assassin.assassin.try(:username) %></p>
+    <p>Kills: Placeholder</p>
+    <p>Kill Code: <%= @play_as_target.try(:useronekillcode) %></p>
+    <p><%= link_to 'Edit my Kill Code', edit_play_path(@play_as_assassin) %></p>
+    <p><%= link_to 'Edit my User Info', edit_user_registration_path %></p>
+
+  </div>
+
+</div>
+
+<div id="next_target">
+  <%= render 'next_target_form' %>
+</div>
+
+<div id="stats_game">
+
+  <h2>The Game</h2>
+  <p>Placeholder for number of people playing and number of people killed</p>
+</div>

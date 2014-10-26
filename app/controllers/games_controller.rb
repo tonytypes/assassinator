@@ -14,9 +14,14 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    # @target_kill_code = params[:target_kill_code]
     @game = Game.find(params[:id])
     # This will let me display the plays for each game, in Show view
     @plays = @game.plays.all
+    @play_as_assassin = @game.plays.where('userone_id' => current_user).first
+    @play_as_target = @game.plays.where('targetuser_id' => current_user).first
+
+    @killcodecheck = Killcodecheck.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +29,7 @@ class GamesController < ApplicationController
     end
   end
 
-  # Here's the code to execute upon click, to actually edit the table
+  # Here's the code to begin game, executed on click, to actually edit the table
   def begingame
     @game = Game.find(params[:id])
     # This will let me display the plays for each game, in Show view
@@ -43,6 +48,8 @@ class GamesController < ApplicationController
     end
 
   end
+
+  # I removed the old getnewtarget from here
 
   # GET /games/new
   # GET /games/new.json

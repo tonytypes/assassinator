@@ -56,3 +56,39 @@ remove the shadow under the Navbar. */
 .description {
 	margin: 10px 0px;
 }
+
+#stats_target, #stats_you {
+	display: inline-block;
+}
+
+#stats_target {
+	width: 350px;
+	float: left;
+}
+
+#target_pic, #target_info {
+	display: inline-block;
+}
+
+#target_pic {
+	width: 100px;
+	float:left;
+}
+
+#target_info {
+	width: 250px;
+	float: left;
+}
+
+#stats_you {
+	width: 350px;
+	float: left;
+}
+
+#next_target {
+	clear: both;
+}
+
+#stats_game {
+	clear: both;
+}
