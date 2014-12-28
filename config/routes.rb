@@ -1,15 +1,15 @@
-Brewsion::Application.routes.draw do
-  resources :plays
-
-  resources :killcodechecks
-
-# If I revert to a put method in here and on form_for, I can get the workaround 
-#  resources :killcodechecks do
-#    member do
-#      put :create
-#    end
-#  end
-
+Brewsion::Application.routes.draw do  
+  
+  resources :plays do
+    member do
+      get :editkillcode
+      put :updatekillcode
+      post :updatekillcode
+      get :edittargetkillcode
+      put :updatetargetkillcode
+      post :updatetargetkillcode
+    end
+  end
 
   resources :games do
     member do

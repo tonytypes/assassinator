@@ -1,16 +1,14 @@
-<p>
-  <b>Gamename:</b>
-  <%= @game.gamename %>
-</p>
-
+<!--If this Game has begun, the gamestats will be rendered below-->
 <% if @game.status == 1 %>
-  <p>Game has begun, so gamestats will be rendered below</p>
   <%= render 'gamestats' %>
 <% end %>
 
-<h1>Listing plays for this game</h1>
+<!--Begin temporary listing of Plays for this Game-->
 
-<table>
+<p style="color:red">This red section will be deleted before Go-Live</p>
+<h1 style="color:red">Listing plays for this game</h1>
+
+<table style="color:red">
   <tr>
     <th>Game ID</th>
     <th>Game Name</th>
@@ -21,6 +19,7 @@
     <th>TargetUser Name</th>
     <th>UserOne Kill Code</th>
     <th>UserOne Kills</th>
+    <th>Target Kill Code (NEW)</th>
   </tr>
 
 <% @plays.each do |play| %>
@@ -34,9 +33,12 @@
     <td><%= play.target.try(:username) %></td>
     <td><%= play.useronekillcode %></td>
     <td><%= play.kills %></td>
+    <td><%= play.try(:targetkillcode) %></td>
   </tr>
 <% end %>
 </table>
+
+<!--End temporary listing of Plays for this Game-->
 
 <% if @game.status == 0 %>
   <%= link_to 'Begin Game', { action: "begingame", id: @game }, method: :put %> |

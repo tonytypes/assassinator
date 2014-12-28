@@ -1,5 +1,7 @@
 class Play < ActiveRecord::Base
-  attr_accessible :useronekillcode, :game_id, :userone_id, :targetuser_id, :useronestatus, :kills
+  attr_accessible :useronekillcode, :game_id, :userone_id, :targetuser_id
+  attr_accessible :useronestatus, :kills
+  attr_accessor :updatetargetkillcode, :updatekillcode, :targetkillcode
 	validates_uniqueness_of :userone_id, :scope => [:game_id]
 
   # Adds Userone/Assassin to Plays
@@ -19,7 +21,11 @@ class Play < ActiveRecord::Base
   belongs_to :game, class_name: "Game", foreign_key: "game_id"
   validates :userone_id, presence: true
 #  validates :targetuser_id, presence: true
+  
+  validates :game_id, :presence => true, :on => :create
+  validates :useronekillcode, :presence => true, :on => :create
 
-  validates_presence_of :useronekillcode, :game_id
+  validates :useronekillcode, :presence => true, :on => :update, :if => :updatekillcode
+  validates :targetkillcode, :presence => true, :on => :update, :if => :updatetargetkillcode
 
 end

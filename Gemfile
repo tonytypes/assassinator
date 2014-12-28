@@ -10,7 +10,11 @@ group :production do
 end
 
 group :development, :test do
+	gem 'pry-rails'
+	gem 'pry-debugger'
+	gem 'pry-stack_explorer'
 	gem 'sqlite3'
+	gem 'better_errors'
 end
 
 group :assets do

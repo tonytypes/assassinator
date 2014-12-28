@@ -11,21 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141025171455) do
-
-  create_table "game_plays", :force => true do |t|
-    t.integer  "game_id"
-    t.integer  "userone_id"
-    t.integer  "usertwo_id"
-    t.string   "useronekillcode"
-    t.integer  "useronestatus"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  add_index "game_plays", ["userone_id", "usertwo_id"], :name => "index_game_plays_on_userone_id_and_usertwo_id", :unique => true
-  add_index "game_plays", ["userone_id"], :name => "index_game_plays_on_userone_id"
-  add_index "game_plays", ["usertwo_id"], :name => "index_game_plays_on_usertwo_id"
+ActiveRecord::Schema.define(:version => 20141228224638) do
 
   create_table "games", :force => true do |t|
     t.string   "gamename"

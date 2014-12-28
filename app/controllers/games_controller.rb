@@ -21,8 +21,6 @@ class GamesController < ApplicationController
     @play_as_assassin = @game.plays.where('userone_id' => current_user).first
     @play_as_target = @game.plays.where('targetuser_id' => current_user).first
 
-    @killcodecheck = Killcodecheck.new
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @game }
